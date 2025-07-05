@@ -1,0 +1,17 @@
+// /webfront/views/index.pug
+
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Photo Gallery
+    a(href="/upload/") Upload a new photo
+    hr
+    if photo_paths && photo_paths.length
+      each photo in photo_paths
+        div.photo
+          a(href=photo)
+            img(src=photo, alt="Photo", width="200")
+    else
+      p No photos available.

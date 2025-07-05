@@ -1,0 +1,24 @@
+// /webfront/views/upload.pug
+
+doctype html
+html
+  head
+    title= title
+    script.
+      function validateFile(input) {
+        const file = input.files[0];
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+          alert('File size exceeds 5MB.');
+          input.value = '';
+        }
+      }
+  body
+    h1 Upload a New Photo
+    form(action="/photo/" method="POST" enctype="multipart/form-data")
+      div
+        label(for="image") Select Image:
+        input(type="file" name="image" accept="image/*" required onchange="validateFile(this)")
+      div
+        button(type="submit") Upload
+    hr
+    a(href="/") Back to Gallery

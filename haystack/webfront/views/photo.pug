@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1= title
+    img(src=photo_path, alt="Photo", width="400")
+    if last_accessed
+      p Last accessed: #{last_accessed.toLocaleString()}
+    hr
+    a(href="/") Back to Gallery

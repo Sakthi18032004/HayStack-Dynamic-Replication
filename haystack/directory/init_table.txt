@@ -1,0 +1,46 @@
+CREATE KEYSPACE photo with replication = {'class':'SimpleStrategy','replication_factor':1};
+
+USE photo;
+
+// status: 0 - only readable, 1 - writable
+CREATE TABLE store (
+  lvid int primary key,
+  mid set<varchar>,
+  status int
+);
+
+INSERT INTO store (lvid, mid, status)
+VALUES (0, {'172.20.0.6:8080','172.20.0.7:8080'}, 1);
+
+INSERT INTO store (lvid, mid, status)
+VALUES (1, {'172.20.0.6:8080','172.20.0.7:8080'}, 0);
+
+
+CREATE TABLE photo (
+
+  pid timeuuid primary key,
+
+  cache_url varchar,
+
+  mid set<varchar>,
+
+  lvid int,
+
+  last_accessed timestamp
+
+);
+
+INSERT INTO photo (pid, cache_url, mid, lvid, last_accessed)
+VALUES (97b72fb0-a84a-11e6-bf37-6d2c86545d91, '172.20.0.5:8080', {'172.20.0.6:8080','172.20.0.7:8080'}, 1, toTimestamp(now()));
+
+INSERT INTO photo (pid, cache_url, mid, lvid,last_accessed)
+VALUES (8c2a5690-a84a-11e6-bf37-6d2c86545d91, '172.20.0.5:8080', {'172.20.0.6:8080','172.20.0.7:8080'}, 1,toTimestamp(now()));
+
+INSERT INTO photo (pid, cache_url, mid, lvid,last_accessed)
+VALUES (fe7c3ce0-a84a-11e6-bf37-6d2c86545d91, '172.20.0.5:8080', {'172.20.0.6:8080','172.20.0.7:8080'}, 1,toTimestamp(now()));
+
+INSERT INTO photo (pid, cache_url, mid, lvid,last_accessed)
+VALUES (0d4f8e70-a84b-11e6-bf37-6d2c86545d91, '172.20.0.5:8080', {'172.20.0.6:8080','172.20.0.7:8080'}, 1,toTimestamp(now()));
+
+INSERT INTO photo (pid, cache_url, mid, lvid,last_accessed)
+VALUES (0dd9a600-a84b-11e6-bf37-6d2c86545d91, '172.20.0.5:8080', {'172.20.0.6:8080','172.20.0.7:8080'}, 1,toTimestamp(now()));
